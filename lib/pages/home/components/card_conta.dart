@@ -41,7 +41,7 @@ Widget cardConta(BuildContext context, Conta conta) {
           ),
           const Positioned(
             top: 63,
-            right: 16,
+            left: 16,
             child: Text(
               'Saldo em Conta',
               style: TextStyle(

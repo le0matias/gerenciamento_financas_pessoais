@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:date_format/date_format.dart';
+import 'package:gerenciamento_financas_pessoais/pages/home/home_page.dart';
 import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
 import '../../models/operacao.dart';
@@ -42,8 +43,10 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Operação'),
-        backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.blue : Colors.red,
+        title: Text(
+          widget.tipoOperacao == 'entrada' ? 'Cadastro de Entrada' : 'Cadastro de Saída'
+        ),
+        backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.green : Colors.red,
       ),
       body: FutureBuilder(
         future: _carregaContas,
@@ -120,9 +123,12 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                                 custo: double.parse(_custoController.text),
                             );
                             os.addOperacao(novaOperacao);
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => HomePage())
+                            );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.blue : Colors.red
+                            backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.green : Colors.red
                           ),
                           child: const Text('Cadastrar'),
                         ),

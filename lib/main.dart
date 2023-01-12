@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gerenciamento_financas_pessoais/pages/cadastrar_conta/cadastrar_conta_page.dart';
+import 'package:gerenciamento_financas_pessoais/pages/home/home_page.dart';
 
 import 'pages/cadastrar_operacao/cadastrar_operacao_page.dart';
 
@@ -12,13 +13,15 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: const [Locale('pt', 'BR'),],
       debugShowCheckedModeBanner: true,
       // home: CadastrarContaPage(),
-      home: CadastrarOperacaoPage(tipoOperacao: 'saida',),
+      // home: CadastrarOperacaoPage(tipoOperacao: 'entrada',),
+      home: HomePage(),
     );
   }
 }
