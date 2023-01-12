@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import '../../../models/conta.dart';
 
 Widget cardConta(BuildContext context, Conta conta) {
+
+  final currencyFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
+
   return InkWell(
     onTap: (){},
     child: Container(
@@ -34,15 +39,18 @@ Widget cardConta(BuildContext context, Conta conta) {
               ),
             ),
           ),
-          const Positioned(
-            top: 63,
-            right: 16,
-            child: Text(
-              'Saldo em Conta',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
+          const Padding(
+            padding: EdgeInsets.only(top: 60, left: 16),
+            child: Positioned(
+              top: 63,
+              right: 16,
+              child: Text(
+                'Saldo em Conta',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -50,7 +58,7 @@ Widget cardConta(BuildContext context, Conta conta) {
             top: 81,
             left: 16,
             child: Text(
-              'R\$ ${conta.valor}',
+              currencyFormatter.format(conta.valor),
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w900,
