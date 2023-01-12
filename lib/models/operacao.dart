@@ -24,7 +24,7 @@ class Operacao {
     id = map['id'];
     tipo = map['tipo'];
     conta = map['conta'];
-    nome = map['resumo'];
+    nome = map['nome'];
     resumo = map['resumo'];
     data = map['data'];
     custo = map['custo'];
