@@ -39,18 +39,15 @@ Widget cardConta(BuildContext context, Conta conta) {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 60, left: 16),
-            child: Positioned(
-              top: 63,
-              right: 16,
-              child: Text(
-                'Saldo em Conta',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
+          const Positioned(
+            top: 63,
+            right: 16,
+            child: Text(
+              'Saldo em Conta',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
               ),
             ),
           ),
