@@ -4,7 +4,7 @@ import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
 
 import '../../models/conta.dart';
 
-class CadastroContaPage extends StatelessWidget {
+class CadastrarContaPage extends StatelessWidget {
   final _nomeController = TextEditingController();
   final _valorController = TextEditingController();
   ContaService cs = ContaService();

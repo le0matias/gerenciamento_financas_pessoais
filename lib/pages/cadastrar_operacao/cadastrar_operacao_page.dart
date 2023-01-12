@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:date_format/date_format.dart';
+import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
+import '../../models/operacao.dart';
 import '../../services/conta_service.dart';
 import '../../models/conta.dart';
 
@@ -22,6 +24,7 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   final _tipoController = TextEditingController();
   final _dataController = TextEditingController();
   ContaService cs = ContaService();
+  OperacaoService os = OperacaoService();
   DateTime selectDate = DateTime.now();
 
   late Future<List> _carregaContas;
@@ -107,7 +110,17 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                         height: 40,
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Operacao novaOperacao = Operacao(
+                                nome: _nomeController.text,
+                                resumo: _resumoController.text,
+                                data: selectDate.toString(),
+                                tipo: widget.tipoOperacao,
+                                conta: _contaSelecionada?.id,
+                                custo: double.parse(_custoController.text),
+                            );
+                            os.addOperacao(novaOperacao);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.blue : Colors.red
                           ),

@@ -24,8 +24,8 @@ class DbUtil {
     db.execute('''
       CREATE TABLE operacao(id INTEGER PRIMARY KEY AUTOINCREMENT,
       tipo VARCHAR(20), nome VARCHAR(50), resumo VARCHAR(100),
-      data DATETIME, custo REAL, conta INTEGER FOREIGN KEY(conta)
-      REFERENCES conta (id)
+      data DATETIME, custo REAL, conta INTEGER,
+      FOREIGN KEY(conta) REFERENCES conta (id)
     )''');
   }
 

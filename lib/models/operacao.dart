@@ -1,7 +1,7 @@
 class Operacao {
   late String nome, resumo, tipo, data;
   late int? id;
-  late int conta;
+  late int? conta;
   late double custo;
 
   Operacao({this.id, required this.nome, required this.resumo, required this.tipo,
