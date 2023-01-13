@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
+import 'package:flutter/services.dart';
 
 import '../home/home_page.dart';
 import '../../models/operacao.dart';
@@ -32,6 +33,7 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   OperacaoRestService ors = OperacaoRestService();
   DateTime selectDate = DateTime.now();
 
+  final _formKey = GlobalKey<FormState>();
   late Future<List> _carregaContas;
   late List<Conta> _contas;
 
@@ -61,6 +63,7 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Form(
+                key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,16 +71,38 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                       controller: _nomeController,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(labelText: 'Nome'),
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Preencha o campo Nome';
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     TextFormField(
                       controller: _resumoController,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(labelText: 'Resumo'),
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Preencha o campo Resumo';
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     TextFormField(
                       controller: _custoController,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: const InputDecoration(labelText: 'Custo'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Preencha o campo Custo';
+                          } else {
+                            return null;
+                          }
+                        }
                     ),
                     GestureDetector(
                       onTap: () => _selectDate(context),
@@ -103,6 +128,13 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                               _contaSelecionada = conta;
                             });
                           },
+                          validator: (value) {
+                            if(value == null) {
+                              return 'Selecione uma Conta';
+                            } else {
+                              return null;
+                            }
+                          },
                           items: _contas.map((conta) {
                             return DropdownMenuItem(
                                 value: conta,
@@ -118,22 +150,24 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Operacao novaOperacao = Operacao(
+                            if(_formKey.currentState!.validate()) {
+                              Operacao novaOperacao = Operacao(
                                 nome: _nomeController.text,
                                 resumo: _resumoController.text,
                                 data: formatDate(
-                                  selectDate,
-                                  [yyyy, '-', mm, '-', dd]
+                                    selectDate,
+                                    [yyyy, '-', mm, '-', dd]
                                 ).toString(),
                                 tipo: widget.tipoOperacao,
                                 conta: _contaSelecionada?.id,
                                 custo: double.parse(_custoController.text),
-                            );
-                            // os.addOperacao(novaOperacao); metodo SQLite
-                            ors.addOperacao(novaOperacao);
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => HomePage())
-                            );
+                              );
+                              // os.addOperacao(novaOperacao); metodo SQLite
+                              ors.addOperacao(novaOperacao);
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => HomePage())
+                              );
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: widget.tipoOperacao == 'entrada' ? Colors.green : Colors.red
