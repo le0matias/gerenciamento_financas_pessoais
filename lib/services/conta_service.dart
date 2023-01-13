@@ -26,7 +26,7 @@ class ContaService {
     return Conta.fromMap(dataList.first);
   }
 
-  void atulizaValorConta(int? id, double custo, String tipoOperacao){
+  void atualizaValorConta(int? id, double custo, String tipoOperacao){
     String sql;
     if(tipoOperacao == 'entrada'){
       sql = 'UPDATE conta SET valor = valor + ? WHERE id = ?';
@@ -34,5 +34,6 @@ class ContaService {
       sql = 'UPDATE conta SET valor = valor - ? WHERE id = ?';
     }
     List<dynamic> arguments = [custo, id];
+    DbUtil.executaSQL(sql, arguments);
   }
 }
