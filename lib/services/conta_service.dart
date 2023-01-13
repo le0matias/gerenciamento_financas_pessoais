@@ -14,4 +14,25 @@ class ContaService {
     _contaList = dataList.map((contas) => Conta.fromMap(contas)).toList();
     return _contaList;
   }
+
+  Future<Conta> getConta(int id) async {
+    String whereString = 'id = ?';
+    List<dynamic> whereArguments = [id];
+    final dataList = await DbUtil.getDataWhere(
+        'conta',
+        whereString,
+        whereArguments,
+    );
+    return Conta.fromMap(dataList.first);
+  }
+
+  void atulizaValorConta(int? id, double custo, String tipoOperacao){
+    String sql;
+    if(tipoOperacao == 'entrada'){
+      sql = 'UPDATE conta SET valor = valor + ? WHERE id = ?';
+    } else {
+      sql = 'UPDATE conta SET valor = valor - ? WHERE id = ?';
+    }
+    List<dynamic> arguments = [custo, id];
+  }
 }

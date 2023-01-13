@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import '../../../models/conta.dart';
+import 'package:gerenciamento_financas_pessoais/pages/conta/conta_page.dart';
+import '../../models/conta.dart';
 
 Widget cardConta(BuildContext context, Conta conta) {
 
   final currencyFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
   return InkWell(
-    onTap: (){},
+    onTap: (){
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => ContaPage(id: conta.id))
+      );
+    },
     child: Container(
       margin: const EdgeInsets.only(right: 10, left: 10),
       width: 250,

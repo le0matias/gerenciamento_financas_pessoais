@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciamento_financas_pessoais/pages/home/components/card_conta.dart';
+import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_conta.dart';
 import 'package:gerenciamento_financas_pessoais/pages/operacao/operacao_page.dart';
 import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_operacao.dart';
 import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
