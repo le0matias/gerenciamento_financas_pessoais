@@ -50,4 +50,12 @@ class Operacao {
     data = json['data'];
     custo = json['custo'];
   }
+
+  Operacao.fromJsonNested(Map json){
+    tipo = json['tipo'];
+    nome = json['nome'];
+    resumo = json['resumo'];
+    data = json['data'];
+    custo = json['custo'];
+  }
 }

@@ -38,69 +38,57 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-            padding: const EdgeInsets.only(top: 30, bottom: 20),
-            child: SizedBox(
-              height: 176,
-              width: double.infinity,
-              child: FutureBuilder(
-                future: _carregaConta,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if(snapshot.hasData){
-                    _conta = snapshot.data;
-                    return cardConta(context, _conta);
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-            ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24, bottom: 15, right: 22),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                'Todas as Operações',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
+    return FutureBuilder(
+        future: _carregaConta,
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+          if(snapshot.hasData) {
+            _conta = snapshot.data;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 20),
+                  child: SizedBox(
+                    height: 175,
+                    width: double.infinity,
+                    child: cardConta(context, _conta),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        FutureBuilder(
-            future: _carregaOperacoes,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if(snapshot.hasData){
-                _operacoes = snapshot.data;
-                return Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: _operacoes.length,
-                      padding: const EdgeInsets.all(10),
-                      itemBuilder: (context, index) {
-                        return cardOperacao(context, index, _operacoes[index]);
-                      }
-                    )
-                );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-        )
-      ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 24, bottom: 15, right: 22),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Todas as Operações',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: _conta.operacoes!.length,
+                    padding: const EdgeInsets.all(10),
+                    itemBuilder: (context, index){
+                      return cardOperacao(context, index, _conta.operacoes![index]);
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
     );
   }
 

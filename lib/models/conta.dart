@@ -1,7 +1,11 @@
+import 'operacao.dart';
+
 class Conta {
+
   late int? id;
   late String nome;
   late double valor;
+  late List<Operacao>? operacoes;
 
   Conta({this.id, required this.nome, required this.valor});
 
@@ -27,8 +31,12 @@ class Conta {
   }
 
   Conta.fromJson(Map json){
+    var lista = json['operacoes'] as List;
+    List<Operacao> operacaoList = lista.map((operacao) =>
+      Operacao.fromJsonNested(operacao)).toList();
     id = json['id'];
     nome = json['nome'];
     valor = json['valor'];
+    operacoes = operacaoList;
   }
 }
