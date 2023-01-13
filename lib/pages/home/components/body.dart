@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_conta.dart';
-import 'package:gerenciamento_financas_pessoais/pages/operacao/operacao_page.dart';
-import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_operacao.dart';
-import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
-import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
+
+import '../../operacao/operacao_page.dart';
+import '../../shared_components/card_conta.dart';
+import '../../shared_components/card_operacao.dart';
+import '../../../services/conta_service.dart';
+import '../../../services/operacao_service.dart';
+import '../../../services/conta_rest_service.dart';
 
 class Body extends StatefulWidget {
 
@@ -14,6 +16,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   ContaService cs = ContaService();
   OperacaoService os = OperacaoService();
+  ContaRestService crs = ContaRestService();
   late Future<List> _carregaContas;
   late List _contas;
   late Future<List> _carregaOperacoes;
@@ -122,7 +125,8 @@ class _BodyState extends State<Body> {
   }
 
   Future<List> _getContas() async {
-    return await cs.listaTodasContas();
+    //return await cs.listaTodasContas(); metodo SQLite
+    return await crs.getContas();
   }
 
   Future<List> _getOperacoes() async {
