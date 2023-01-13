@@ -40,4 +40,14 @@ class Operacao {
     data = map['data'];
     custo = map['custo'];
   }
+
+  Operacao.fromJson(Map json){
+    id = json['id'];
+    tipo = json['tipo'];
+    conta = json['conta_id'];
+    nome = json['nome'];
+    resumo = json['resumo'];
+    data = json['data'];
+    custo = json['custo'];
+  }
 }

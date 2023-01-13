@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciamento_financas_pessoais/services/operacao_rest_service.dart';
 
 import '../../shared_components/card_operacao.dart';
 import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
@@ -12,6 +13,8 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
 
   OperacaoService os = OperacaoService();
+  OperacaoRestService ors = OperacaoRestService();
+
   late Future<List> _carregaOperacoes;
   late List _operacoes;
 
@@ -69,6 +72,7 @@ class _BodyState extends State<Body> {
   }
 
   Future<List> _getOperacoes() async {
-    return await os.getAllOperacoes();
+    // return await os.getAllOperacoes(); metodo SQLite
+    return await ors.getOperacoes();
   }
 }

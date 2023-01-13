@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciamento_financas_pessoais/services/operacao_rest_service.dart';
 
 import '../../operacao/operacao_page.dart';
 import '../../shared_components/card_conta.dart';
@@ -17,6 +18,8 @@ class _BodyState extends State<Body> {
   ContaService cs = ContaService();
   OperacaoService os = OperacaoService();
   ContaRestService crs = ContaRestService();
+  OperacaoRestService ors = OperacaoRestService();
+
   late Future<List> _carregaContas;
   late List _contas;
   late Future<List> _carregaOperacoes;
@@ -130,6 +133,7 @@ class _BodyState extends State<Body> {
   }
 
   Future<List> _getOperacoes() async {
-    return await os.getAllOperacoes();
+    // return await os.getAllOperacoes(); metodo SQLite
+    return await ors.getOperacoes();
   }
 }
