@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:date_format/date_format.dart';
 import 'package:gerenciamento_financas_pessoais/pages/home/home_page.dart';
+import 'package:gerenciamento_financas_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
 import '../../models/operacao.dart';
@@ -24,7 +25,9 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   final _custoController = TextEditingController();
   final _tipoController = TextEditingController();
   final _dataController = TextEditingController();
+
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
   OperacaoService os = OperacaoService();
   DateTime selectDate = DateTime.now();
 
@@ -150,7 +153,8 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   }
 
   Future<List> _getContas() async {
-    return await cs.listaTodasContas();
+    // return await cs.listaTodasContas(); metodo SQLite
+    return await crs.getContas();
   }
 
   Future<void> _selectDate(BuildContext context) async {
