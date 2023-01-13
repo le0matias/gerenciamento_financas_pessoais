@@ -4,6 +4,7 @@ import 'package:gerenciamento_financas_pessoais/models/conta.dart';
 import 'package:gerenciamento_financas_pessoais/models/operacao.dart';
 import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_conta.dart';
 import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_operacao.dart';
+import 'package:gerenciamento_financas_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
 import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
@@ -21,6 +22,8 @@ class _BodyState extends State<Body> {
 
   OperacaoService os = OperacaoService();
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
+
   late Future<List> _carregaOperacoes;
   late Future<Conta> _carregaConta;
   late Conta _conta;
@@ -102,7 +105,8 @@ class _BodyState extends State<Body> {
   }
 
   Future<Conta> _getConta(int id) async {
-    return await cs.getConta(id);
+    // return await cs.getConta(id); metodo SQLite
+    return await crs.getContaId(id.toString());
   }
 
   Future<List> _getOperacoes(int id) async {
