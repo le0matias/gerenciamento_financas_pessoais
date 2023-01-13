@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_financas_pessoais/pages/home/home_page.dart';
+import 'package:gerenciamento_financas_pessoais/services/conta_rest_service.dart';
 import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
 
 import '../../models/conta.dart';
@@ -8,6 +9,7 @@ class CadastrarContaPage extends StatelessWidget {
   final _nomeController = TextEditingController();
   final _valorController = TextEditingController();
   ContaService cs = ContaService();
+  ContaRestService crs = ContaRestService();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,8 @@ class CadastrarContaPage extends StatelessWidget {
                           nome: _nomeController.text,
                           valor: double.parse(_valorController.text),
                         );
-                        cs.adicionarConta(novaConta);
+                        // cs.adicionarConta(novaConta); sqlite method
+                        crs.addConta(novaConta);
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => HomePage())
                         );

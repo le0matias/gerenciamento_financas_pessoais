@@ -13,6 +13,13 @@ class Conta {
     };
   }
 
+  Map<String, dynamic> toJson(){
+    return {
+      'nome': nome,
+      'valor': valor,
+    };
+  }
+
   Conta.fromMap(Map map){
     id = map['id'];
     nome = map['nome'];
