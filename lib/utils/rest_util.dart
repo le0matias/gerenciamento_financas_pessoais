@@ -28,4 +28,11 @@ class RestUtil {
     );
     return response;
   }
+
+  static Future<http.Response> removeDataId(String uri, String id) async {
+    final response = await http.delete(
+      Uri.https(urlBase, '$uri/$id'),
+    );
+    return response;
+  }
 }

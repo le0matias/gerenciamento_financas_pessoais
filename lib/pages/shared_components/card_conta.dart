@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciamento_financas_pessoais/services/conta_rest_service.dart';
 
 import 'package:intl/intl.dart';
 
@@ -14,6 +15,9 @@ Widget cardConta(BuildContext context, Conta conta) {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (_) => ContaPage(id: conta.id))
       );
+    },
+    onLongPress: (){
+      showDialogAlert(context, conta);
     },
     child: Container(
       margin: const EdgeInsets.only(right: 10, left: 10),
@@ -72,4 +76,34 @@ Widget cardConta(BuildContext context, Conta conta) {
       ),
     ),
   );
+}
+
+showDialogAlert(BuildContext context, Conta conta) {
+  ContaRestService crs = ContaRestService();
+
+  Widget botaoRemover = TextButton(
+      onPressed: (){
+        crs.removeConta(conta.id.toString());
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+      child: Text('Remover')
+  );
+  Widget botaoCancelar = TextButton(
+      onPressed: (){
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+      child: Text('Cancelar')
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Deseja remover essa conta?'),
+    content: Text('Essa ação não pode ser desfeita'),
+    actions: [
+      botaoRemover,
+      botaoCancelar,
+    ],
+  );
+  showDialog(context: context, builder: (BuildContext context) {
+    return alert;
+  });
 }
