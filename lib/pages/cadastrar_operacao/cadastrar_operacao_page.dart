@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:date_format/date_format.dart';
-import 'package:gerenciamento_financas_pessoais/pages/home/home_page.dart';
-import 'package:gerenciamento_financas_pessoais/services/conta_rest_service.dart';
-import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
+import '../home/home_page.dart';
 import '../../models/operacao.dart';
-import '../../services/conta_service.dart';
 import '../../models/conta.dart';
+import '../../services/operacao_rest_service.dart';
+import '../../services/operacao_service.dart';
+import '../../services/conta_rest_service.dart';
+import '../../services/conta_service.dart';
 
 class CadastrarOperacaoPage extends StatefulWidget {
 
@@ -29,6 +29,7 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
   ContaService cs = ContaService();
   ContaRestService crs = ContaRestService();
   OperacaoService os = OperacaoService();
+  OperacaoRestService ors = OperacaoRestService();
   DateTime selectDate = DateTime.now();
 
   late Future<List> _carregaContas;
@@ -120,12 +121,16 @@ class _CadastrarOperacaoPageState extends State<CadastrarOperacaoPage> {
                             Operacao novaOperacao = Operacao(
                                 nome: _nomeController.text,
                                 resumo: _resumoController.text,
-                                data: selectDate.toString(),
+                                data: formatDate(
+                                  selectDate,
+                                  [yyyy, '-', mm, '-', dd]
+                                ).toString(),
                                 tipo: widget.tipoOperacao,
                                 conta: _contaSelecionada?.id,
                                 custo: double.parse(_custoController.text),
                             );
-                            os.addOperacao(novaOperacao);
+                            // os.addOperacao(novaOperacao); metodo SQLite
+                            ors.addOperacao(novaOperacao);
                             Navigator.of(context).push(
                                 MaterialPageRoute(builder: (_) => HomePage())
                             );

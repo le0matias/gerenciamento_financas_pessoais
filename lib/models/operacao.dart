@@ -20,6 +20,17 @@ class Operacao {
     };
   }
 
+  Map<String, dynamic> toJson(){
+    return {
+      'tipo': tipo,
+      'conta_id': conta,
+      'nome': nome,
+      'resumo': resumo,
+      'data':data,
+      'custo':custo,
+    };
+  }
+
   Operacao.fromMap(Map map){
     id = map['id'];
     tipo = map['tipo'];
