@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
 
-import '../../../models/operacao.dart';
+import '../../models/operacao.dart';
 
 Widget cardOperacao(BuildContext context, int index, Operacao operacao){
 

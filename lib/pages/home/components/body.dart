@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_financas_pessoais/pages/home/components/card_conta.dart';
-import 'package:gerenciamento_financas_pessoais/pages/home/components/card_operacao.dart';
+import 'package:gerenciamento_financas_pessoais/pages/operacao/operacao_page.dart';
+import 'package:gerenciamento_financas_pessoais/pages/shared_components/card_operacao.dart';
 import 'package:gerenciamento_financas_pessoais/services/conta_service.dart';
 import 'package:gerenciamento_financas_pessoais/services/operacao_service.dart';
 
@@ -70,7 +71,12 @@ class _BodyState extends State<Body> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => OperacaoPage())
+                    );
+                  },
                   child: const Text(
                     'Ver todos',
                     style: TextStyle(
@@ -92,7 +98,7 @@ class _BodyState extends State<Body> {
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: _operacoes.length,
+                        itemCount: _operacoes.length > 4 ? 4 : _operacoes.length,
                         padding: const EdgeInsets.all(10),
                         itemBuilder: (context, index) {
                         return cardOperacao(
