@@ -25,4 +25,10 @@ class Conta {
     nome = map['nome'];
     valor = map['valor'];
   }
+
+  Conta.fromJson(Map json){
+    id = json['id'];
+    nome = json['nome'];
+    valor = json['valor'];
+  }
 }

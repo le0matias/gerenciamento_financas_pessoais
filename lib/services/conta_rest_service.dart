@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
 
 import '../utils/rest_util.dart';
@@ -9,5 +11,12 @@ class ContaRestService {
         '/contas',
         conta.toJson(),
     );
+  }
+
+  Future<List<Conta>> getConta() async {
+    final Response response = await RestUtil.getData('/contas');
+    List<dynamic> conteudo = jsonDecode(response.body);
+    List<Conta> contas = conteudo.map((dynamic conta) => Conta.fromJson(conta)).toList();
+    return contas;
   }
 }

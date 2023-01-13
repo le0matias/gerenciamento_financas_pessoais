@@ -14,4 +14,11 @@ class RestUtil {
     );
     return response;
   }
+
+  static Future<http.Response> getData(String uri) async {
+    final response = await http.get(
+      Uri.https(urlBase, uri)
+    );
+    return response;
+  }
 }
