@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
@@ -24,68 +25,93 @@ Widget cardOperacao(BuildContext context, int index, Operacao operacao){
       ],
       color: Colors.white,
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            const SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  operacao.nome,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: operacao.tipo == 'entrada' ? Colors.green : Colors.red,
-                  ),
-                ),
-                Text(
-                  operacao.resumo,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+    child: Slidable(
+      endActionPane: ActionPane(
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+              backgroundColor: Color(0xFF21B7CA),
+              foregroundColor: Colors.white,
+              icon: Icons.edit,
+              label: 'Editar',
+              onPressed: (context){
+                print("Clicou Edição");
+              }
+          ),
+          SlidableAction(
+              backgroundColor: Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Remover',
+              onPressed: (context){
+                print("Clicou Remoção");
+              }
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const SizedBox(width: 20),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    currencyFormatter.format(operacao.custo),
-                    style: const TextStyle(
+                    operacao.nome,
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: Colors.grey,
+                      color: operacao.tipo == 'entrada' ? Colors.green : Colors.red,
                     ),
                   ),
                   Text(
-                    formatDate(
-                    DateTime.parse(operacao.data),
-                    [dd, '/', mm, '/', yyyy]).toString(),
+                    operacao.resumo,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: Colors.grey,
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      currencyFormatter.format(operacao.custo),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      formatDate(
+                          DateTime.parse(operacao.data),
+                          [dd, '/', mm, '/', yyyy]).toString(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
