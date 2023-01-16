@@ -24,4 +24,15 @@ class OperacaoRestService {
       throw Exception('Erro ao listar Operações');
     }
   }
+
+  Future<Operacao> getOperacaoId(String id) async {
+    final Response response = await RestUtil.getDataId(
+        '/operacoes',
+        id);
+    if(response.statusCode == 201){
+      return Operacao.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Erro ao buscar Operação');
+    }
+  }
 }

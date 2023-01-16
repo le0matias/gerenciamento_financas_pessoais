@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:gerenciamento_financas_pessoais/pages/editar_operacao/editar_operacao_page.dart';
 
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
@@ -35,7 +36,11 @@ Widget cardOperacao(BuildContext context, int index, Operacao operacao){
               icon: Icons.edit,
               label: 'Editar',
               onPressed: (context){
-                print("Clicou Edição");
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (_) => EditarOperacaoPage(idOperacao: operacao.id.toString(),)
+                  )
+                );
               }
           ),
           SlidableAction(
