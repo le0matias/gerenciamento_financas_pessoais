@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:gerenciamento_financas_pessoais/pages/conta/components/body.dart';
+import 'package:gerenciamento_financas_pessoais/pages/conta/components/conta_body.dart';
 
 class ContaPage extends StatelessWidget {
 

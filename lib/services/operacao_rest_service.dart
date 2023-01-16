@@ -51,9 +51,21 @@ class OperacaoRestService {
         id,
     );
     if(response.statusCode == 201){
-      print('Operação atualizada');
+      print('Operação atualizada + $novaOperacao');
     } else {
       throw Exception('Erro ao atualizar Operação');
+    }
+  }
+
+  Future<void> removeOperacoes(String id) async {
+    final response = await RestUtil.removeDataId(
+      '/operacoes',
+      id,
+    );
+    if(response.statusCode == 204) {
+      print('Operação excluída com sucesso');
+    } else {
+      throw Exception('Erro ao remover Operação');
     }
   }
 }

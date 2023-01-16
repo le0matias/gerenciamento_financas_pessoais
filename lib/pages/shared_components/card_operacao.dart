@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gerenciamento_financas_pessoais/pages/editar_operacao/editar_operacao_page.dart';
+import 'package:gerenciamento_financas_pessoais/services/operacao_rest_service.dart';
 
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
@@ -10,7 +11,11 @@ import '../../models/operacao.dart';
 Widget cardOperacao(BuildContext context, int index, Operacao operacao){
 
   final currencyFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
-  
+  OperacaoRestService ors = OperacaoRestService();
+  Future<void> _removerOperacao(String id) async {
+    return await ors.removeOperacoes(id);
+  }
+
   return Container(
     margin: EdgeInsets.only(bottom: 8, left: 10, right: 10),
     height: 70,
@@ -49,7 +54,7 @@ Widget cardOperacao(BuildContext context, int index, Operacao operacao){
               icon: Icons.delete,
               label: 'Remover',
               onPressed: (context){
-                print("Clicou Remoção");
+                _removerOperacao(operacao.id.toString());
               }
           ),
         ],

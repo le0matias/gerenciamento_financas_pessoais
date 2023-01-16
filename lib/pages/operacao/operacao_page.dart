@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciamento_financas_pessoais/pages/operacao/components/body.dart';
+import 'package:gerenciamento_financas_pessoais/pages/operacao/components/operacao_body.dart';
 
 class OperacaoPage extends StatelessWidget {
 
