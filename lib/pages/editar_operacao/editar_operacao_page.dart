@@ -180,7 +180,7 @@ class _EditarOperacaoPageState extends State<EditarOperacaoPage> {
                                   custo: double.parse(_custoController.text),
                                 );
                                 // os.addOperacao(novaOperacao); metodo SQLite
-                                ors.addOperacao(novaOperacao);
+                                ors.editOperacao(novaOperacao, _operacao.id.toString());
                                 Navigator.of(context).push(
                                     MaterialPageRoute(builder: (_) => HomePage())
                                 );

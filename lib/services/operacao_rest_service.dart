@@ -35,4 +35,25 @@ class OperacaoRestService {
       throw Exception('Erro ao buscar Operação');
     }
   }
+
+  Future<Operacao?> editOperacao(Operacao operacao, String id) async {
+    final novaOperacao = {
+      'nome': operacao.nome,
+      'resumo': operacao.resumo,
+      'custo': operacao.custo,
+      'data': operacao.data,
+      'conta_id': operacao.conta,
+      'tipo': operacao.tipo
+    };
+    final response = await RestUtil.editData(
+        '/operacoes',
+        novaOperacao,
+        id,
+    );
+    if(response.statusCode == 201){
+      print('Operação atualizada');
+    } else {
+      throw Exception('Erro ao atualizar Operação');
+    }
+  }
 }
